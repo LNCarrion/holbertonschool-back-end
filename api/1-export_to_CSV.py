@@ -34,7 +34,7 @@ def todo_list(employee_id):
         if todo['completed']:
             print(f'\t{todo["title"]}')
 
-    # export data to CSV
+    # Export data to CSV
     filename = f'{user_id}.csv'
     with open(filename, 'w', newline='') as csvfile:
         csvwriter = csv.writer(csvfile)
