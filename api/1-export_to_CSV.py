@@ -7,7 +7,7 @@ import sys
 
 def todo_list(employee_id):
     """
-    this function will fetch the URL, user info,
+    This function will fetch the URL, user info,
     TODO list and display the employee progress
     """
     base_url = 'https://jsonplaceholder.typicode.com'
