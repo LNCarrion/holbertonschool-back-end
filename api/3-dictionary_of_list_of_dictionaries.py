@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""collecting data from API"""
 import requests
 import json
 
