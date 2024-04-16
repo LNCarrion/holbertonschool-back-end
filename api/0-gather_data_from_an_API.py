@@ -12,7 +12,6 @@ def todo_list(employee_id):
 
     base_url = 'https://jsonplaceholder.typicode.com'
 
-
     user_response = requests.get(f'{base_url}/users/{employee_id}')
     user_data = user_response.json()
     employee_name = user_data['name']
@@ -22,7 +21,6 @@ def todo_list(employee_id):
 
     total_task = len(todos_data)
     done_tasks = sum(1 for todo in todos_data if todo['completed'])
-
 
     print(f'Employee {employee_name} /
           is done with tasks({done_tasks} / {total_task}): ')
