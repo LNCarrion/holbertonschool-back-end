@@ -21,15 +21,15 @@ def todo_list(employee_id):
     todos_response = requests.get(f'{base_url}/todos?userId={employee_id}')
     todos_data = todos_response.json()
 
-    tasks = [{"task": todo['title'], "completed":\
-            todo['completed'], "username": username}\
-                for todo in todos_data]
-    
+    tasks = [{"task": todo['title'], "completed":
+             todo['completed'], "username": username}
+             for todo in todos_data]
+
     # Export data to JSON
     filename = f'{user_id}.json'
     with open(filename, 'w') as jsonfile:
         json.dump({str(user_id): tasks}, jsonfile)
-    
+
 
 if __name__ == "__main__":
     """Call the function"""
