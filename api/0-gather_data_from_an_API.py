@@ -16,7 +16,8 @@ def todo_list(employee_id):
     user_data = user_response.json()
     employee_name = user_data['name']
 
-    todos_response = requests.get(f'{base_url}/todos?userId={employee_id}')
+    todos_response = requests.get('{}/todos?userId={}'
+                                  .format(base_url, employee_id))
     todos_data = todos_response.json()
 
     total_task = len(todos_data)
