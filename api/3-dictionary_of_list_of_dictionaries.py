@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """collecting data from API"""
-import requests
 import json
+import requests
 
 
 def fetch_all_todo_list():
