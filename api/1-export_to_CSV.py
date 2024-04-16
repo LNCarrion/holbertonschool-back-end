@@ -4,9 +4,10 @@ import csv
 import sys
 import requests
 
+
 def todo_list(employee_id):
     """
-    this function will fetch the URL, user info, 
+    this function will fetch the URL, user info,
     TODO list and display the employee progress
     """
     base_url = 'https://jsonplaceholder.typicode.com'
@@ -16,7 +17,7 @@ def todo_list(employee_id):
     user_data = user_response.json()
     user_id = user_data['id']
     username = user_data['username']
-    
+
     # getting TODO list
     todos_response = requests.get(f'{base_url}/todos?userId={employee_id}')
     todos_data = todos_response.json()
@@ -26,22 +27,28 @@ def todo_list(employee_id):
     done_tasks = sum(1 for todo in todos_data if todo['completed'])
 
     # display progress
-    print(f'Employee {username} is done with tasks({done_tasks}/{total_task}):')
+    print_value = 'Employee {} is done with tasks({}/{}):'\
+        .format(username, done_tasks, total_task)
+    print(print_value)
     for todo in todos_data:
         if todo['completed']:
             print(f'\t{todo["title"]}')
 
-    #export data to CSV
+    # export data to CSV
     filename = f'{user_id}.csv'
     with open(filename, 'w', newline='') as csvfile:
         csvwriter = csv.writer(csvfile)
-        csvwriter.writerow(['USER_ID', 'USERNAME', 'TASK_COMPLETED_STATUS', 'TASK_TITLE'])
+        csvwriter.writerow(['USER_ID', 'USERNAME',
+                            'TASK_COMPLETED_STATUS', 'TASK_TITLE'])
         for todo in todos_data:
-            csvwriter.writerow([user_id, username, todo['completed'], todo['title']])
+            csvwriter.writerow([user_id, username,
+                                todo['completed'], todo['title']])
 
     print(f'Data exported to {filename}')
+
+
 if __name__ == "__main__":
-    if len(sys.argv) !=2:
+    if len(sys.argv) != 2:
         print("usage: python script.py <employee_id>")
         sys.exit(1)
 
