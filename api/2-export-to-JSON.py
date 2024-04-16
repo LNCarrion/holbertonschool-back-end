@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """collecting data from API"""
+import json
 import requests
 import sys
 
@@ -14,21 +15,21 @@ def todo_list(employee_id):
 
     user_response = requests.get(f'{base_url}/users/{employee_id}')
     user_data = user_response.json()
-    employee_name = user_data['name']
+    user_id = user_data['id']
+    username = user_data['username']
 
     todos_response = requests.get(f'{base_url}/todos?userId={employee_id}')
     todos_data = todos_response.json()
 
-    total_task = len(todos_data)
-    done_tasks = sum(1 for todo in todos_data if todo['completed'])
-
-    print_value = 'Employee {} is done with tasks({}/{}):'\
-        .format(employee_name, done_tasks, total_task)
-    print(print_value)
-    for todo in todos_data:
-        if todo['completed']:
-            print(f'\t{todo["title"]}')
-
+    tasks = [{"task": todo['title'], "completed":\
+            todo['completed'], "username": username}\
+                for todo in todos_data]
+    
+    # Export data to JSON
+    filename = f'{user_id}.json'
+    with open(filename, 'w') as jsonfile:
+        json.dump({str(user_id): tasks}, jsonfile)
+    
 
 if __name__ == "__main__":
     """Call the function"""
