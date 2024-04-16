@@ -22,7 +22,7 @@ def todo_list(employee_id):
     total_task = len(todos_data)
     done_tasks = sum(1 for todo in todos_data if todo['completed'])
 
-    print_value = 'Employee {}is done with tasks({}/{}): '\
+    print_value = 'Employee {} is done with tasks({}/{}):'\
         .format(employee_name, done_tasks, total_task)
     print(print_value)
     for todo in todos_data:
