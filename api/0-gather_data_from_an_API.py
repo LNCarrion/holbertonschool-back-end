@@ -1,47 +1,16 @@
 #!/usr/bin/python3
-"""collecting data from API"""
-import requests
-import sys
+""" returns to-do list information about employee ID """
+from requests import get
+from sys import argv
 
+if __name__ == '__main__':
+    APIurl = "https://jsonplaceholder.typicode.com"
+    employee = get(APIurl + "/users/{}".format(argv[1])).json()
+    to_do_list = get(APIurl + "/todos", params={
+        "userId": argv[1]}).json()
 
-def todo_list(employee_id):
-    """
-    This function will fetch the URL, user info,
-    TODO list and display the employee progress
-    """
-
-    base_url = 'https://jsonplaceholder.typicode.com'
-
-    user_response = requests.get('{}/users/{}'.format(base_url, employee_id))
-    user_data = user_response.json()
-    employee_name = user_data['name']
-
-    todos_response = requests.get('{}/todos?userId={}'
-                                  .format(base_url, employee_id))
-    todos_data = todos_response.json()
-
-    total_task = len(todos_data)
-    done_tasks = sum(1 for todo in todos_data if todo['completed'])
-
-    print_value = 'Employee {} is done with tasks({}/{}):'\
-        .format(employee_name, done_tasks, total_task)
-    print(print_value)
-    for todo in todos_data:
-        if todo['completed']:
-            print('\t{}'.format(todo['title']))
-
-
-if __name__ == "__main__":
-    """call the function"""
-
-    if len(sys.argv) != 2:
-        print("usage: python script.py <employee_id>")
-        sys.exit(1)
-
-    try:
-        employee_id = int(sys.argv[1])
-    except ValueError:
-        print("Employee ID must be an integer")
-        sys.exit(1)
-
-    todo_list(employee_id)
+    finished = [i.get("title") for i in to_do_list if i.get(
+        "completed") is True]
+    print("Employee {} is done with tasks({}/{}):".format(employee.get(
+        "name"), len(finished), len(to_do_list)))
+    [print("\t {}".format(c)) for c in finished]
