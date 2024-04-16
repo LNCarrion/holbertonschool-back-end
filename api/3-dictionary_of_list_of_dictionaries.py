@@ -36,8 +36,6 @@ def fetch_all_todo_list():
     with open(filename, 'w') as jsonfile:
         json.dump(all_tasks, jsonfile)
 
-    print(f'Data exported to {filename}')
-
 
 if __name__ == "__main__":
     fetch_all_todo_list()
