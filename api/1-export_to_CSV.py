@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 """collecting data from API"""
 import csv
-import sys
 import requests
+import sys
+
 
 
 def todo_list(employee_id):
