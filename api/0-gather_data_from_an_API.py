@@ -28,7 +28,7 @@ def todo_list(employee_id):
     print(print_value)
     for todo in todos_data:
         if todo['completed']:
-            print(f'\t{todo["title"]}')
+            print('\t{}'.format(todo['title']))
 
 
 if __name__ == "__main__":
