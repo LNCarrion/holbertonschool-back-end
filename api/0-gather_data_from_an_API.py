@@ -26,8 +26,8 @@ def todo_list(employee_id):
     done_tasks = sum(1 for todo in todos_data if todo['completed'])
 
     # display progress
-    print(f'Employee {employee_name}
-          is done with tasks({done_tasks}/{total_task}): ')
+    print(f'Employee {employee_name} /
+          is done with tasks({done_tasks} / {total_task}): ')
     for todo in todos_data:
         if todo['completed']:
             print(f'\t{todo["title"]}')
