@@ -12,7 +12,7 @@ def todo_list(employee_id):
 
     base_url = 'https://jsonplaceholder.typicode.com'
 
-    user_response = requests.get(f'{base_url}/users/{employee_id}')
+    user_response = requests.get('{}/users/{}'.format(base_url, employee_id))
     user_data = user_response.json()
     employee_name = user_data['name']
 
