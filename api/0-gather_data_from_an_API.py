@@ -34,6 +34,7 @@ def todo_list(employee_id):
 
 
 if __name__ == "__main__":
+    """call the function"""
 
     if len(sys.argv) != 2:
         print("usage: python script.py <employee_id>")
